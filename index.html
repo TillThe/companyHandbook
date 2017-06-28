@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Справочник по компаниям</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@17.5.0/dist/css/suggestions.min.css" type="text/css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxtransport-xdomainrequest/1.0.1/jquery.xdomainrequest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/suggestions-jquery@17.5.0/dist/js/jquery.suggestions.min.js"></script>
+<script src="js/script.js"></script>
+</head>
+<body>
+  <header class="page-header container">
+    <h1 class="page-title">Справочник по компаниям</h1>
+    <a href="#" class="btn-add" onclick="toggleModal()">Добавить компанию</a>
+  </header>
+  <main class="">
+    <section class="company container">
+      <table class="company-list">
+        <caption>Список компаний:</caption>
+        <thead>
+          <tr>
+            <th class="sort" sorted="digits" value="INN" reversed="false">ИНН</th>
+            <th class="sort" sorted="letters" value="Name" reversed="false">Наименование</th>
+            <th class="sort" sorted="letters" value="Director" reversed="false">Руководитель</th>
+            <th colspan="2">Управление</th>
+          </tr>
+        </thead>
+        <tbody id="company-list">
+          <tr>
+            <td>7814560597</td>
+            <td>Росгид</td>
+            <td>Седлецкий М.Я.</td>
+            <td><span class="edit">Редактировать</span></td>
+            <td><span class="delete">Удалить</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section>
+      <ul class="pagination container">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+      </ul>
+    </section>
+    <aside class="modal" id="modal">
+      <div class="modal-content">
+        <form class="modal-form" action="" onsubmit="catList.addItem(this)">
+        <button class="modal-close" onclick="toggleModal()"></button>
+          <h3 class="modal-content-title">Добавить компанию</h3>
+          <div class="input-block">
+            <label>Наименование компании:</label>
+            <input class="form-el" type="text" name="Name" id="Name">
+          </div>
+          <div class="input-block">
+            <label>ИНН компании:</label>
+            <input class="form-el" type="text" name='INN' id="INN">
+          </div>
+          <div class="input-block">
+            <label>Руководитель компании:</label>
+            <input class="form-el" type="text" name="Director" id="Director">
+          </div>
+          <div class="input-block">
+            <input class="btn" type="submit" value="Добавить">
+          </div>
+        </form>
+      </div>
+    </aside>
+  </main>
+</body>
+</html>

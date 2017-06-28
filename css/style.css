@@ -1,0 +1,226 @@
+html, body {
+  margin: 0;
+  height: 90%;
+}
+a {
+  display: block;
+  color: #000;
+  text-decoration: none;
+}
+.container {
+  display: block;
+  width: 1024px;
+  margin: 0 auto;
+  padding: 1px 20px;
+  box-sizing: border-box;
+}
+.jumbotron {
+  width: 100%;
+  background-color: #d3d3d3;
+}
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  background-color: #40E0D0;
+}
+.page-title {
+  margin: 0;
+  font-size: 28px;
+  line-height: 40px;
+}
+.page-header .btn-add {
+  padding: 10px 20px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 24px;
+  background-color: #20B2AA;
+  background-image: linear-gradient(to bottom, #40E0D0, #20B2AA);
+}
+.page-header .btn-add:hover {
+  background-image: linear-gradient(to top, #40E0D0, #20B2AA);
+}
+.company {
+  padding: 10px 20px 20px;
+  background-color: #F0F0F0;
+}
+.company-list {
+  width: 100%;
+  height: auto;
+  border: 1px solid #000;
+  border-collapse: collapse;
+}
+.company-list caption {
+  margin: 10px 0;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 32px;
+  text-align: left;
+}
+.company-list tr {
+
+}
+.company-list tbody tr:hover {
+
+}
+.company-list th,
+.company-list td {
+  padding: 5px 10px;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  border: 1px solid #000;
+}
+.company-list td {
+  border-color: #d3d3d3;
+}
+.company-list tbody td:nth-child(4),
+.company-list tbody td:last-child {
+  width: 12.5%;
+}
+.company-list span:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+.company-list .editing {
+  background-color: aliceblue;
+}
+.company-list .sort:hover {
+  background-color: #AFEEEE;
+  cursor: pointer;
+}
+/*пагинация*/
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+.pagination li {
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  font-size: 16px;
+  line-height: 30px;
+  text-align: center;
+  list-style: none;
+  background-color: #888888;
+  border: 1px solid #C8C8C8;
+}
+/*модальное окно*/
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+  z-index: 99;
+  -webkit-transition: opacity 400ms ease-in;
+  -moz-transition: opacity 400ms ease-in;
+  transition: opacity 400ms ease-in;
+  pointer-events: none;
+}
+.modal.active {
+  display: block;
+  pointer-events: auto;
+  background: rgba(0,0,0,0.4);
+}
+.modal-content {
+  position: relative;
+  display: block;
+  width: 400px;
+  height: auto;
+  margin: 30px auto;
+  padding: 15px 25px 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px #999;
+  overflow: auto;
+}
+.modal-content-title {
+  margin: 10px 0;
+  font-size: 22px;
+  text-align: center;
+}
+.modal-content .input-block {
+  display: block;
+  width: 100%;
+  margin: 20px 0;
+  box-sizing: border-box;
+}
+.modal-content .input-block label {
+  display: block;
+  color: #000;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: left;
+}
+.modal-content .input-block input {
+  width: 100%;
+  height: 40px;
+  padding: 10px 15px;
+  font-size: 16px;
+  line-height: 20px;
+  box-sizing: border-box;
+}
+.modal-content .btn {
+  height: 40px;
+  padding: 12px;
+  color: #fff;
+  font-size: 14px;
+  line-height: 14px;
+  background-image: linear-gradient(to top, #40E0D0, #20B2AA);
+  border: none;
+}
+.modal-content .btn:hover,
+.modal-content .btn:focus {
+  transform: none;
+  background-image: linear-gradient(to bottom, #40E0D0, #20B2AA);
+  outline: none;
+}
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  border: none;
+  box-sizing: border-box;
+  /*transition: all ease 0.8s;*/
+  opacity: 0.5;
+}
+.modal-close::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 9px;
+  width: 14px;
+  height: 2px;
+  background-color: black;
+  transform: rotate(45deg);
+}
+.modal-close::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 9px;
+  width: 14px;
+  height: 2px;
+  background-color: black;
+  transform: rotate(-45deg);
+}
+.modal-close:hover {
+  /*background-color: rgba(133, 165, 171, 0.8);*/
+  opacity: 1;
+  cursor: pointer;
+}
+.modal-close:active,
+.modal-close:focus {
+  outline: none;
+  opacity: 1;
+}
