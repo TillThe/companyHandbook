@@ -1,33 +1,74 @@
 var catList = new CatalogList();
 document.addEventListener('DOMContentLoaded', function() {
   catList.afterReload();
+  catList.createPagination();
+  document.getElementById('itemsOnPage').value = catList.getItemsOnPage();
   $("#Name").suggestions({
     token: "a4673c9942e4738c8bfdfdaad192edef690df398",
     type: "PARTY",
     count: 5,
     /* Вызывается, когда пользователь выбирает одну из подсказок */
     onSelect: function(suggestion) {
-      console.log(suggestion);
-      document.getElementById('INN').value = suggestion.data.inn;
-      document.getElementById('Director').value = suggestion.data.management.name ;
+      try {
+        document.getElementById('INN').value = suggestion.data.inn;
+      } catch(e) {
+        document.getElementById('INN').value = "";
+      }
+      try {
+        document.getElementById('Director').value = suggestion.data.management.name;
+      } catch(e) {
+        document.getElementById('Director').value = "";
+      }
     }
   });
 });
 
+window.addEventListener('hashchange', hashchange);
+
+function hashchange(){
+  var hash = location.hash;
+  if (hash.substring(0,6) == "#page-") {
+    localStorage.setItem('currentPage', hash.substring(6));
+    catList.refreshList();
+  }
+}
+
 function CatalogList() {
   this.ls = localStorage;
   if (localStorage.getItem('itemsOnPage') == null) {
-    localStorage.setItem('itemsOnPage', 10);
+    localStorage.setItem('itemsOnPage', 4);
   }
   if (localStorage.getItem('currentPage') == null) {
     localStorage.setItem('currentPage', 1);
   }
 }
-CatalogList.prototype.afterReload = function() {
-  this.refreshList();
+CatalogList.prototype.getItemsOnPage = function() {
+  return localStorage.getItem('itemsOnPage');
 }
 CatalogList.prototype.countItems = function() {
+  return parseInt(this.getArray().length);
+}
+CatalogList.prototype.createPagination = function() {
+  var itemsOnPage = localStorage.getItem('itemsOnPage'),
+      pageAmount = Math.ceil(this.countItems() / itemsOnPage),
+      str = "",
+      i;
 
+  for (i = 1; i <= pageAmount; i++) {
+    str += (parseInt(localStorage.getItem('currentPage')) == i) ? "<li class='active'><a href='#page-" + i + "'>" + i + "</a></li>" : "<li><a href='#page-" + i + "'>" + i + "</a></li>";
+  }
+  document.getElementById('pagination').innerHTML = str;
+}
+CatalogList.prototype.changeItemsOnPage = function(btn) {
+  if (parseInt(btn.value) < 50 && parseInt(btn.value) > 0) {
+    localStorage.setItem('itemsOnPage', btn.value);
+  } else {
+    localStorage.setItem('itemsOnPage', 50);
+  }
+  this.refreshList();
+}
+CatalogList.prototype.afterReload = function() {
+  this.refreshList();
 }
 CatalogList.prototype.getData = function() {
   try {
@@ -67,7 +108,7 @@ CatalogList.prototype.addItem = function(form) {
 
     }
     dataObj[formObj['INN']] = formObj;
-    this.ls.setItem('data', JSON.stringify(dataObj));
+    localStorage.setItem('data', JSON.stringify(dataObj));
     toggleModal();
     clearModalForm();
     this.refreshList();
@@ -107,14 +148,23 @@ CatalogList.prototype.editItem = function(btn) {
 }
 CatalogList.prototype.refreshList = function() {
   var data = this.getData(),
-      str = "";
+      str = "",
+      itemsOnPage = parseInt(localStorage.getItem('itemsOnPage')),
+      currentPage = parseInt(localStorage.getItem('currentPage')),
+      i = 0;
+
+  this.createPagination();
+
   for (var key in data) {
-    str += "<tr value='" + data[key]['INN'] + "'><td class='editable'>" + data[key]['INN'] + "</td>"
-    + "<td class='editable'>" + data[key]['Name'] + "</td>"
-    + "<td class='editable'>" + data[key]['Director'] + "</td>"
-    + "<td><span class='edit'>Редактировать</span></td>"
-    + "<td><span class='delete'>Удалить</span></td>"
-    + "</tr>";
+    if (i >= itemsOnPage * (currentPage-1) && i < itemsOnPage * currentPage) {
+      str += "<tr value='" + data[key]['INN'] + "'><td class='editable'>" + data[key]['INN'] + "</td>"
+      + "<td class='editable'>" + data[key]['Name'] + "</td>"
+      + "<td class='editable'>" + data[key]['Director'] + "</td>"
+      + "<td><span class='edit'>Редактировать</span></td>"
+      + "<td><span class='delete'>Удалить</span></td>"
+      + "</tr>";
+    }
+    i++;
   }
   document.getElementById('company-list').innerHTML = str;
   addHandlers();

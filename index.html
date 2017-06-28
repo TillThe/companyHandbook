@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Справочник по компаниям</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="https://cdn.jsdelivr.net/npm/suggestions-jquery@17.5.0/dist/css/suggestions.min.css" type="text/css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet" type="text/css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -19,6 +19,7 @@
   <main class="">
     <section class="company container">
       <table class="company-list">
+        <label class="pag-items">Элементов на странице: <input type="number" id="itemsOnPage" onchange="catList.changeItemsOnPage(this)"></label>
         <caption>Список компаний:</caption>
         <thead>
           <tr>
@@ -29,19 +30,10 @@
           </tr>
         </thead>
         <tbody id="company-list">
-          <tr>
-            <td>7814560597</td>
-            <td>Росгид</td>
-            <td>Седлецкий М.Я.</td>
-            <td><span class="edit">Редактировать</span></td>
-            <td><span class="delete">Удалить</span></td>
-          </tr>
         </tbody>
       </table>
-    </section>
-    <section>
-      <ul class="pagination container">
-        <li>1</li>
+      <ul class="pagination container" id="pagination">
+        <li><a href="#1">1</a></li>
         <li>2</li>
         <li>3</li>
         <li>4</li>

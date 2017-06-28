@@ -43,27 +43,41 @@ a {
   background-image: linear-gradient(to top, #40E0D0, #20B2AA);
 }
 .company {
+  position: relative;
   padding: 10px 20px 20px;
   background-color: #F0F0F0;
 }
+.company .pag-items {
+  position: absolute;
+  top: 25px;
+  right: 20px;
+  color: #000;
+  font-size: 14px;
+  line-height: 18px;
+  z-index: 10;
+}
+.company .pag-items input {
+  width: 30px;
+  height: 20px;
+  text-align: center;
+}
 .company-list {
+  position: relative;
   width: 100%;
   height: auto;
   border: 1px solid #000;
   border-collapse: collapse;
 }
 .company-list caption {
+  position: relative;
   margin: 10px 0;
   font-weight: 500;
   font-size: 20px;
   line-height: 32px;
   text-align: left;
 }
-.company-list tr {
-
-}
 .company-list tbody tr:hover {
-
+  background-color: #FFFAFA;
 }
 .company-list th,
 .company-list td {
@@ -95,6 +109,7 @@ a {
 .pagination {
   display: flex;
   justify-content: center;
+  margin: 40px auto 0;
 }
 .pagination li {
   width: 30px;
@@ -106,6 +121,12 @@ a {
   list-style: none;
   background-color: #888888;
   border: 1px solid #C8C8C8;
+}
+.pagination a {
+  color: #fff;
+}
+.pagination li.active {
+  background-color: #28bdb3;
 }
 /*модальное окно*/
 .modal {
